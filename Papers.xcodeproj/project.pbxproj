@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C136F551C2BB8BB00E9B427 /* Papers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F531C2BB8BB00E9B427 /* Papers.xcdatamodeld */; };
+		5C136F581C2BBC2000E9B427 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F571C2BBC2000E9B427 /* DataStore.m */; };
+		5C136F5A1C2BBC9E00E9B427 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C136F591C2BBC9E00E9B427 /* CoreData.framework */; };
+		5C136F5D1C2BC13300E9B427 /* FileSystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F5C1C2BC13300E9B427 /* FileSystemHelper.m */; };
+		5C136F611C2BC3E400E9B427 /* DataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F601C2BC3E400E9B427 /* DataHelper.m */; };
 		5CAE9C4C1C2B1D24008E3E6F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE9C4B1C2B1D24008E3E6F /* main.m */; };
 		5CAE9C4F1C2B1D24008E3E6F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE9C4E1C2B1D24008E3E6F /* AppDelegate.m */; };
 		5CAE9C521C2B1D24008E3E6F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE9C511C2B1D24008E3E6F /* ViewController.m */; };
@@ -27,6 +32,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C136F541C2BB8BB00E9B427 /* Papers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Papers.xcdatamodel; sourceTree = "<group>"; };
+		5C136F561C2BBC2000E9B427 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
+		5C136F571C2BBC2000E9B427 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		5C136F591C2BBC9E00E9B427 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5C136F5B1C2BC13300E9B427 /* FileSystemHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSystemHelper.h; sourceTree = "<group>"; };
+		5C136F5C1C2BC13300E9B427 /* FileSystemHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSystemHelper.m; sourceTree = "<group>"; };
+		5C136F5F1C2BC3E400E9B427 /* DataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataHelper.h; sourceTree = "<group>"; };
+		5C136F601C2BC3E400E9B427 /* DataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataHelper.m; sourceTree = "<group>"; };
 		5CAE9C461C2B1D24008E3E6F /* Papers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CAE9C4A1C2B1D24008E3E6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CAE9C4B1C2B1D24008E3E6F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C136F5A1C2BBC9E00E9B427 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +74,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C136F5E1C2BC24400E9B427 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C136F591C2BBC9E00E9B427 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			path = Papers;
+			sourceTree = "<group>";
+		};
 		5CAE9C3D1C2B1D24008E3E6F = {
 			isa = PBXGroup;
 			children = (
 				5CAE9C481C2B1D24008E3E6F /* Papers */,
 				5CAE9C621C2B1D24008E3E6F /* PapersTests */,
 				5CAE9C471C2B1D24008E3E6F /* Products */,
+				5C136F5E1C2BC24400E9B427 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +105,8 @@
 		5CAE9C481C2B1D24008E3E6F /* Papers */ = {
 			isa = PBXGroup;
 			children = (
+				5C136F5B1C2BC13300E9B427 /* FileSystemHelper.h */,
+				5C136F5C1C2BC13300E9B427 /* FileSystemHelper.m */,
 				5CAE9C4D1C2B1D24008E3E6F /* AppDelegate.h */,
 				5CAE9C4E1C2B1D24008E3E6F /* AppDelegate.m */,
 				5CAE9C501C2B1D24008E3E6F /* ViewController.h */,
@@ -88,6 +114,11 @@
 				5CAE9C531C2B1D24008E3E6F /* Main.storyboard */,
 				5CAE9C561C2B1D24008E3E6F /* Images.xcassets */,
 				5CAE9C581C2B1D24008E3E6F /* LaunchScreen.xib */,
+				5C136F531C2BB8BB00E9B427 /* Papers.xcdatamodeld */,
+				5C136F561C2BBC2000E9B427 /* DataStore.h */,
+				5C136F571C2BBC2000E9B427 /* DataStore.m */,
+				5C136F5F1C2BC3E400E9B427 /* DataHelper.h */,
+				5C136F601C2BC3E400E9B427 /* DataHelper.m */,
 				5CAE9C491C2B1D24008E3E6F /* Supporting Files */,
 			);
 			path = Papers;
@@ -219,8 +250,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C136F581C2BBC2000E9B427 /* DataStore.m in Sources */,
+				5C136F611C2BC3E400E9B427 /* DataHelper.m in Sources */,
 				5CAE9C521C2B1D24008E3E6F /* ViewController.m in Sources */,
+				5C136F5D1C2BC13300E9B427 /* FileSystemHelper.m in Sources */,
 				5CAE9C4F1C2B1D24008E3E6F /* AppDelegate.m in Sources */,
+				5C136F551C2BB8BB00E9B427 /* Papers.xcdatamodeld in Sources */,
 				5CAE9C4C1C2B1D24008E3E6F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,6 +453,7 @@
 				5CAE9C6B1C2B1D24008E3E6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5CAE9C6C1C2B1D24008E3E6F /* Build configuration list for PBXNativeTarget "PapersTests" */ = {
 			isa = XCConfigurationList;
@@ -426,8 +462,22 @@
 				5CAE9C6E1C2B1D24008E3E6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5C136F531C2BB8BB00E9B427 /* Papers.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5C136F541C2BB8BB00E9B427 /* Papers.xcdatamodel */,
+			);
+			currentVersion = 5C136F541C2BB8BB00E9B427 /* Papers.xcdatamodel */;
+			path = Papers.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5CAE9C3E1C2B1D24008E3E6F /* Project object */;
 }
