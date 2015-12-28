@@ -15,21 +15,21 @@
     DataStore *dataStore = [DataStore sharedDataStore];
     NSManagedObjectContext *context = [dataStore context];
     
-    // Categories
-    NSManagedObject *category1;
-    category1 = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+    // Notes
+    NSManagedObject *note1;
+    note1 = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                               inManagedObjectContext:context];
     
-    [category1 setValue:@"My first tet title" forKey:@"title"];
-    [category1 setValue:@"Stuff about IOS I need to master ." forKey:@"body"];
+    [note1 setValue:@"My first tet title" forKey:@"title"];
+    [note1 setValue:@"Stuff about IOS I need to master ." forKey:@"body"];
     
     
-    NSManagedObject *category2;
-    category2 = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+    NSManagedObject *note2;
+    note2 = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                               inManagedObjectContext:context];
     
-    [category2 setValue:@"my title test" forKey:@"title"];
-    [category2 setValue:@"Buy milk" forKey:@"body"];
+    [note2 setValue:@"my title test" forKey:@"title"];
+    [note2 setValue:@"Buy milk" forKey:@"body"];
     
     [dataStore saveChanges];
 }
@@ -43,18 +43,18 @@
     req = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
     
     NSError *error;
-    NSArray *allCategories = [context executeFetchRequest:req error:&error];
+    NSArray *allNotes = [context executeFetchRequest:req error:&error];
     
-    if (!allCategories) {
+    if (!allNotes) {
         NSLog(@"An error occurred. Error: %@", [error localizedDescription]);
     }
     
     NSLog(@"Logging Notes");
     
-    for (NSManagedObject *cat in allCategories) {
+    for (NSManagedObject *note in allNotes) {
         NSLog(@"Note Name:  %@ (%@)",
-              [cat valueForKey:@"title"],
-              [cat valueForKey:@"body"]);
+              [note valueForKey:@"title"],
+              [note valueForKey:@"body"]);
     }
 }
 

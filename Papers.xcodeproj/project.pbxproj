@@ -19,6 +19,7 @@
 		5CAE9C571C2B1D24008E3E6F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CAE9C561C2B1D24008E3E6F /* Images.xcassets */; };
 		5CAE9C5A1C2B1D24008E3E6F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CAE9C581C2B1D24008E3E6F /* LaunchScreen.xib */; };
 		5CAE9C661C2B1D24008E3E6F /* PapersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE9C651C2B1D24008E3E6F /* PapersTests.m */; };
+		C30AECEC1C30AB0C00D808AA /* NoteListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C30AECEB1C30AB0C00D808AA /* NoteListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		5CAE9C5F1C2B1D24008E3E6F /* PapersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PapersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CAE9C641C2B1D24008E3E6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CAE9C651C2B1D24008E3E6F /* PapersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PapersTests.m; sourceTree = "<group>"; };
+		C30AECEA1C30AB0C00D808AA /* NoteListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListTableViewController.h; sourceTree = "<group>"; };
+		C30AECEB1C30AB0C00D808AA /* NoteListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				5C136F5F1C2BC3E400E9B427 /* DataHelper.h */,
 				5C136F601C2BC3E400E9B427 /* DataHelper.m */,
 				5CAE9C491C2B1D24008E3E6F /* Supporting Files */,
+				C30AECEA1C30AB0C00D808AA /* NoteListTableViewController.h */,
+				C30AECEB1C30AB0C00D808AA /* NoteListTableViewController.m */,
 			);
 			path = Papers;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C136F581C2BBC2000E9B427 /* DataStore.m in Sources */,
+				C30AECEC1C30AB0C00D808AA /* NoteListTableViewController.m in Sources */,
 				5C136F611C2BC3E400E9B427 /* DataHelper.m in Sources */,
 				5CAE9C521C2B1D24008E3E6F /* ViewController.m in Sources */,
 				5C136F5D1C2BC13300E9B427 /* FileSystemHelper.m in Sources */,

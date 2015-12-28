@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     [DataHelper createNotesSampleData]; // create test sample data
-    [DataHelper logAllNotes]; // log test sample data
+    //[DataHelper logAllNotes]; // log test sample data
     return YES;
 }
 
