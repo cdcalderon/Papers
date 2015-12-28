@@ -7,7 +7,7 @@
 //
 
 #import "AddNoteViewController.h"
-
+#import "DataStore.h"
 @interface AddNoteViewController ()
 
 @end
@@ -34,4 +34,23 @@
 }
 */
 
+- (IBAction)AddNoteButtonClicked:(UIButton *)sender {
+    
+    [self.noteBodyTextView resignFirstResponder];
+    
+    DataStore *dataStore = [DataStore sharedDataStore];
+    NSManagedObjectContext *context = [dataStore context];
+    
+    // New Note
+    NSManagedObject *note1;
+    note1 = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                          inManagedObjectContext:context];
+    
+    [note1 setValue: self.titleTextField.text forKey:@"title"];
+    [note1 setValue: self.noteBodyTextView.text forKey:@"body"];
+    
+    [dataStore saveChanges];
+    [self.delegate didAddNote];
+    
+}
 @end

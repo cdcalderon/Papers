@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "AddNoteViewController.h"
 
-@interface NoteListTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface NoteListTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+
+- (IBAction)addNoteButtonClicked:(UIBarButtonItem *)sender;
 
 @end

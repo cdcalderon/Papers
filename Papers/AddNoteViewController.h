@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AddNoteViewControllerDelegate <NSObject>
+
+-(void)didAddNote;
+-(void)didCancel;
+
+@end
+
 @interface AddNoteViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+@property (weak, nonatomic) IBOutlet UITextView *noteBodyTextView;
+@property (weak, nonatomic) IBOutlet UIButton *addNoteButton;
+@property (weak, nonatomic) id <AddNoteViewControllerDelegate> delegate;
+
+- (IBAction)AddNoteButtonClicked:(UIButton *)sender;
+
 
 @end

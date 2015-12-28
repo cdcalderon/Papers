@@ -61,6 +61,19 @@
     
 }
 
+- (IBAction)addNoteButtonClicked:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"addNoteViewController" sender:nil];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.destinationViewController isKindOfClass: [AddNoteViewController class]]) {
+        
+        AddNoteViewController *addTaskViewController = segue.destinationViewController;
+        addTaskViewController.delegate = self;
+    }
+}
+
 
 #pragma mark - Table view data source
 
@@ -96,27 +109,38 @@
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self performSegueWithIdentifier:@"editNote" sender:self];
+}
 
-
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [[self tableView] beginUpdates];
+        DataStore *dataStore = [DataStore sharedDataStore];
+        NSManagedObjectContext *context = [dataStore context];
+        
+        [context deleteObject:[_fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row]];
+        
+        NSError *error;
+        
+        [dataStore saveChanges];
+        
+        [[self tableView] endUpdates];
+        
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -141,5 +165,82 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - AddNoteViewControllerDelegate
+-(void)didAddNote {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate methods
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    
+    [[self tableView] beginUpdates];
+}
+
+-(void)controller:(NSFetchedResultsController *)controller
+ didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo
+          atIndex:(NSUInteger)sectionIndex
+    forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                            withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                            withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+-(void)controller:(NSFetchedResultsController *)controller
+  didChangeObject:(id)anObject
+      atIndexPath:(NSIndexPath *)indexPath
+    forChangeType:(NSFetchedResultsChangeType)type
+     newIndexPath:(NSIndexPath *)newIndexPath {
+ 
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+        {
+            UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
+            NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+            [[cell textLabel] setText:[note valueForKey:@"title"]];
+            break;
+        }
+            
+        case NSFetchedResultsChangeMove:
+            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                    withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+
+}
+
+-(NSString *)controller:(NSFetchedResultsController *)controller sectionIndexTitleForSectionName:(NSString *)sectionName {
+    
+    return sectionName;
+}
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    
+    [[self tableView] endUpdates];
+    
+}
 
 @end

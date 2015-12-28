@@ -33,7 +33,8 @@
         // create a URL-based path to the passed in filename located in the Documents directory
         NSURL *dataStoreURL = [FileSystemHelper pathForDocumentsFile:@"notes.sqlite"];
         
-        [[NSFileManager defaultManager] removeItemAtURL:dataStoreURL error:nil];
+        //Note:: Uncomment this line to start with aclean copy of the DB when the App starts
+      //  [[NSFileManager defaultManager] removeItemAtURL:dataStoreURL error:nil];
         
         NSError *error = nil;
         if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:dataStoreURL options:nil error:&error]) {
