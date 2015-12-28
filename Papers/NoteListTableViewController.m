@@ -7,6 +7,7 @@
 //
 
 #import "NoteListTableViewController.h"
+#import "NoteDetailViewController.h"
 #import "DataStore.h"
 
 @interface NoteListTableViewController ()
@@ -62,16 +63,27 @@
 }
 
 - (IBAction)addNoteButtonClicked:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"addNoteViewController" sender:nil];
+    [self performSegueWithIdentifier:@"goToNoteDetailViewController" sender:sender];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.destinationViewController isKindOfClass: [AddNoteViewController class]]) {
         
-        AddNoteViewController *addTaskViewController = segue.destinationViewController;
-        addTaskViewController.delegate = self;
+        AddNoteViewController *addNoteViewController = segue.destinationViewController;
+        addNoteViewController.delegate = self;
+        
+        if (![sender isKindOfClass:[UIBarButtonItem class]]) {
+            NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+            addNoteViewController.toBeUpdatedManagedObject = note;
+            addNoteViewController.isEditing = YES;
+        }
     }
+//    else if ([segue.destinationViewController isKindOfClass: [NoteDetailViewController class]]) {
+//        NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+//        NoteDetailViewController *noteDetailViewController = segue.destinationViewController;
+//        noteDetailViewController.toBeUpdatedManagedObject = note;
+//    }
 }
 
 
@@ -111,7 +123,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self performSegueWithIdentifier:@"editNote" sender:self];
+    [self performSegueWithIdentifier:@"goToNoteDetailViewController" sender:self];
 }
 
 // Override to support conditional editing of the table view.
@@ -168,6 +180,10 @@
 
 #pragma mark - AddNoteViewControllerDelegate
 -(void)didAddNote {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)didCancel {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

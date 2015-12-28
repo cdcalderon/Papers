@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @protocol AddNoteViewControllerDelegate <NSObject>
 
@@ -19,9 +20,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *noteBodyTextView;
 @property (weak, nonatomic) IBOutlet UIButton *addNoteButton;
+@property (nonatomic, strong) NSManagedObject *toBeUpdatedManagedObject;
+@property (nonatomic, assign) BOOL isEditing ;
 @property (weak, nonatomic) id <AddNoteViewControllerDelegate> delegate;
 
 - (IBAction)AddNoteButtonClicked:(UIButton *)sender;
+- (IBAction)cancelButtonClicked:(UIButton *)sender;
 
 
 @end
