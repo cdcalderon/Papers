@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "AddNoteViewController.h"
+#import "NoteDetailViewController.h"
 
-@interface NoteListTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddNoteViewControllerDelegate>
+@interface NoteListTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, NoteDetailViewControllerDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 

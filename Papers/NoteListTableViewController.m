@@ -68,9 +68,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.destinationViewController isKindOfClass: [AddNoteViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass: [NoteDetailViewController class]]) {
         
-        AddNoteViewController *addNoteViewController = segue.destinationViewController;
+        NoteDetailViewController *addNoteViewController = segue.destinationViewController;
         addNoteViewController.delegate = self;
         
         if (![sender isKindOfClass:[UIBarButtonItem class]]) {
