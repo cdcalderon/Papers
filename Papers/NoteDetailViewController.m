@@ -20,7 +20,7 @@
     if (self.isEditing) {
         self.titleTextField.text = [self.toBeUpdatedManagedObject valueForKey:@"title"];
         self.noteBodyTextView.text = [self.toBeUpdatedManagedObject valueForKey:@"body"];
-        [self.addNoteButton setTitle:@"Save" forState:UIControlStateNormal];
+        [self.upsertNoteButton setTitle:@"Save" forState:UIControlStateNormal];
     }
     
     // Do any additional setup after loading the view.
@@ -41,7 +41,7 @@
 }
 */
 
-- (IBAction)AddNoteButtonClicked:(UIButton *)sender {
+- (IBAction)upsertNoteButtonClicked:(UIButton *)sender {
     
     [self.noteBodyTextView resignFirstResponder];
     
