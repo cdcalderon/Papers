@@ -110,6 +110,7 @@
     
     NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     [[cell textLabel] setText:[note valueForKey:@"title"]];
+    [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
     
     return cell;
 }
@@ -235,6 +236,7 @@
             UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
             NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
             [[cell textLabel] setText:[note valueForKey:@"title"]];
+            [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
             break;
         }
             
