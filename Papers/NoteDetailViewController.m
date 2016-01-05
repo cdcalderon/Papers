@@ -57,6 +57,13 @@
     [self.delegate didCancel];
 }
 
+- (IBAction)shareNoteButtonPressed:(UIButton *)sender {
+    NSString *note = self.noteBodyTextView.text;
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[note] applicationActivities:nil];
+   // activityVC.excludedActivityTypes = @[UIActivityTypePostToFacebook];
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
 - (void)editNote:(NSManagedObject *) managedObject {
     
     DataStore *dataStore = [DataStore sharedDataStore];

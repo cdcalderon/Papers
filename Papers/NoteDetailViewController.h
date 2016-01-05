@@ -11,8 +11,8 @@
 
 @protocol NoteDetailViewControllerDelegate <NSObject>
 
--(void)didAddNote;
--(void)didCancel;
+- (void)didAddNote;
+- (void)didCancel;
 
 @end
 
@@ -26,6 +26,7 @@
 
 - (IBAction)upsertNoteButtonClicked:(UIButton *)sender;
 - (IBAction)cancelButtonClicked:(UIButton *)sender;
+- (IBAction)shareNoteButtonPressed:(UIButton *)sender;
 
 
 @end
