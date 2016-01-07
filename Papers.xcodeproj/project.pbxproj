@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07FC3E6D1C3E2404007E0F6E /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FC3E6C1C3E2404007E0F6E /* ShareViewController.m */; };
+		07FC3E701C3E2404007E0F6E /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07FC3E6E1C3E2404007E0F6E /* MainInterface.storyboard */; };
+		07FC3E741C3E2404007E0F6E /* ShareNote.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 07FC3E691C3E2404007E0F6E /* ShareNote.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		07FC3E7B1C3E4380007E0F6E /* Papers.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 5C136F531C2BB8BB00E9B427 /* Papers.xcdatamodeld */; };
+		07FC3E7C1C3E5161007E0F6E /* DataStore.h in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F561C2BBC2000E9B427 /* DataStore.h */; };
+		07FC3E7D1C3E516A007E0F6E /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F571C2BBC2000E9B427 /* DataStore.m */; };
+		07FC3E7E1C3E532B007E0F6E /* FileSystemHelper.h in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F5B1C2BC13300E9B427 /* FileSystemHelper.h */; };
+		07FC3E7F1C3E5330007E0F6E /* FileSystemHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F5C1C2BC13300E9B427 /* FileSystemHelper.m */; };
 		5C136F551C2BB8BB00E9B427 /* Papers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F531C2BB8BB00E9B427 /* Papers.xcdatamodeld */; };
 		5C136F581C2BBC2000E9B427 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C136F571C2BBC2000E9B427 /* DataStore.m */; };
 		5C136F5A1C2BBC9E00E9B427 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C136F591C2BBC9E00E9B427 /* CoreData.framework */; };
@@ -24,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		07FC3E721C3E2404007E0F6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5CAE9C3E1C2B1D24008E3E6F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07FC3E681C3E2404007E0F6E;
+			remoteInfo = ShareNote;
+		};
 		5CAE9C601C2B1D24008E3E6F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5CAE9C3E1C2B1D24008E3E6F /* Project object */;
@@ -33,8 +48,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		07FC3E781C3E2405007E0F6E /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				07FC3E741C3E2404007E0F6E /* ShareNote.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		07A03B3C1C3A411900218F73 /* Papers 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Papers 2.xcdatamodel"; sourceTree = "<group>"; };
+		07FC3E691C3E2404007E0F6E /* ShareNote.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareNote.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		07FC3E6B1C3E2404007E0F6E /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		07FC3E6C1C3E2404007E0F6E /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		07FC3E6F1C3E2404007E0F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		07FC3E711C3E2404007E0F6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07FC3E791C3E4130007E0F6E /* Papers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Papers.entitlements; sourceTree = "<group>"; };
+		07FC3E7A1C3E4265007E0F6E /* ShareNote.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareNote.entitlements; sourceTree = "<group>"; };
 		5C136F541C2BB8BB00E9B427 /* Papers.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Papers.xcdatamodel; sourceTree = "<group>"; };
 		5C136F561C2BBC2000E9B427 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		5C136F571C2BBC2000E9B427 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
@@ -63,6 +99,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		07FC3E661C3E2404007E0F6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5CAE9C431C2B1D24008E3E6F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,6 +124,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07FC3E6A1C3E2404007E0F6E /* ShareNote */ = {
+			isa = PBXGroup;
+			children = (
+				07FC3E7A1C3E4265007E0F6E /* ShareNote.entitlements */,
+				07FC3E6B1C3E2404007E0F6E /* ShareViewController.h */,
+				07FC3E6C1C3E2404007E0F6E /* ShareViewController.m */,
+				07FC3E6E1C3E2404007E0F6E /* MainInterface.storyboard */,
+				07FC3E711C3E2404007E0F6E /* Info.plist */,
+			);
+			path = ShareNote;
+			sourceTree = "<group>";
+		};
 		5C136F5E1C2BC24400E9B427 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +150,7 @@
 			children = (
 				5CAE9C481C2B1D24008E3E6F /* Papers */,
 				5CAE9C621C2B1D24008E3E6F /* PapersTests */,
+				07FC3E6A1C3E2404007E0F6E /* ShareNote */,
 				5CAE9C471C2B1D24008E3E6F /* Products */,
 				5C136F5E1C2BC24400E9B427 /* Frameworks */,
 			);
@@ -105,6 +161,7 @@
 			children = (
 				5CAE9C461C2B1D24008E3E6F /* Papers.app */,
 				5CAE9C5F1C2B1D24008E3E6F /* PapersTests.xctest */,
+				07FC3E691C3E2404007E0F6E /* ShareNote.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +169,7 @@
 		5CAE9C481C2B1D24008E3E6F /* Papers */ = {
 			isa = PBXGroup;
 			children = (
+				07FC3E791C3E4130007E0F6E /* Papers.entitlements */,
 				5C4BA3B01C3A03C700C4F086 /* Main.storyboard */,
 				5CC5BB571C3129F7000DF45E /* NoteDetailViewController.h */,
 				5CC5BB581C3129F7000DF45E /* NoteDetailViewController.m */,
@@ -164,6 +222,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		07FC3E681C3E2404007E0F6E /* ShareNote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07FC3E771C3E2405007E0F6E /* Build configuration list for PBXNativeTarget "ShareNote" */;
+			buildPhases = (
+				07FC3E651C3E2404007E0F6E /* Sources */,
+				07FC3E661C3E2404007E0F6E /* Frameworks */,
+				07FC3E671C3E2404007E0F6E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareNote;
+			productName = ShareNote;
+			productReference = 07FC3E691C3E2404007E0F6E /* ShareNote.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5CAE9C451C2B1D24008E3E6F /* Papers */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CAE9C691C2B1D24008E3E6F /* Build configuration list for PBXNativeTarget "Papers" */;
@@ -171,10 +246,12 @@
 				5CAE9C421C2B1D24008E3E6F /* Sources */,
 				5CAE9C431C2B1D24008E3E6F /* Frameworks */,
 				5CAE9C441C2B1D24008E3E6F /* Resources */,
+				07FC3E781C3E2405007E0F6E /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				07FC3E731C3E2404007E0F6E /* PBXTargetDependency */,
 			);
 			name = Papers;
 			productName = Papers;
@@ -208,8 +285,23 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = contructysystems;
 				TargetAttributes = {
+					07FC3E681C3E2404007E0F6E = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 66CK93Z36P;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					5CAE9C451C2B1D24008E3E6F = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 66CK93Z36P;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					5CAE9C5E1C2B1D24008E3E6F = {
 						CreatedOnToolsVersion = 6.4;
@@ -232,11 +324,21 @@
 			targets = (
 				5CAE9C451C2B1D24008E3E6F /* Papers */,
 				5CAE9C5E1C2B1D24008E3E6F /* PapersTests */,
+				07FC3E681C3E2404007E0F6E /* ShareNote */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		07FC3E671C3E2404007E0F6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07FC3E7B1C3E4380007E0F6E /* Papers.xcdatamodeld in Resources */,
+				07FC3E701C3E2404007E0F6E /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5CAE9C441C2B1D24008E3E6F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -257,6 +359,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		07FC3E651C3E2404007E0F6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07FC3E7F1C3E5330007E0F6E /* FileSystemHelper.m in Sources */,
+				07FC3E7E1C3E532B007E0F6E /* FileSystemHelper.h in Sources */,
+				07FC3E7D1C3E516A007E0F6E /* DataStore.m in Sources */,
+				07FC3E7C1C3E5161007E0F6E /* DataStore.h in Sources */,
+				07FC3E6D1C3E2404007E0F6E /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5CAE9C421C2B1D24008E3E6F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -284,6 +398,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		07FC3E731C3E2404007E0F6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07FC3E681C3E2404007E0F6E /* ShareNote */;
+			targetProxy = 07FC3E721C3E2404007E0F6E /* PBXContainerItemProxy */;
+		};
 		5CAE9C611C2B1D24008E3E6F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5CAE9C451C2B1D24008E3E6F /* Papers */;
@@ -292,6 +411,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		07FC3E6E1C3E2404007E0F6E /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07FC3E6F1C3E2404007E0F6E /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		5C4BA3B01C3A03C700C4F086 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -311,6 +438,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		07FC3E751C3E2404007E0F6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareNote/ShareNote.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = ShareNote/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.Papers.ShareNote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		07FC3E761C3E2404007E0F6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareNote/ShareNote.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ShareNote/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.Papers.ShareNote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		5CAE9C671C2B1D24008E3E6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -397,9 +558,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Papers/Papers.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -407,9 +572,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Papers/Papers.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -450,6 +619,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		07FC3E771C3E2405007E0F6E /* Build configuration list for PBXNativeTarget "ShareNote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07FC3E751C3E2404007E0F6E /* Debug */,
+				07FC3E761C3E2404007E0F6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5CAE9C411C2B1D24008E3E6F /* Build configuration list for PBXProject "Papers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -40,8 +40,13 @@
         [options setValue:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
         [options setValue:[NSNumber numberWithBool:YES] forKey:NSInferMappingModelAutomaticallyOption];
         
+        //extension changes
+        NSURL *directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.papersnote"];
+        NSURL *storeURL = [directory  URLByAppendingPathComponent:@"notes.sqlite"];
+        
+        
         NSError *error = nil;
-        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:dataStoreURL options:options error:&error]) {
+        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
