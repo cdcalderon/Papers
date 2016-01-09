@@ -30,18 +30,16 @@
         model = [NSManagedObjectModel mergedModelFromBundles:nil];
         NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
         
-        // create a URL-based path to the passed in filename located in the Documents directory
-        NSURL *dataStoreURL = [FileSystemHelper pathForDocumentsFile:@"notes.sqlite"];
-        
-        //Note:: Uncomment this line to start with aclean copy of the DB when the App starts
-      //  [[NSFileManager defaultManager] removeItemAtURL:dataStoreURL error:nil];
         NSMutableDictionary *options = [NSMutableDictionary dictionary];
         
         [options setValue:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
         [options setValue:[NSNumber numberWithBool:YES] forKey:NSInferMappingModelAutomaticallyOption];
+
+        NSURL *directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.papersnote"];
+        NSURL *storeURL = [directory  URLByAppendingPathComponent:@"notes.sqlite"];
         
         NSError *error = nil;
-        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:dataStoreURL options:options error:&error]) {
+        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }

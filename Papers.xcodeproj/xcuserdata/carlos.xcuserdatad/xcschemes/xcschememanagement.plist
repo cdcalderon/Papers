@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ShareNote.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>07FC3E681C3E2404007E0F6E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>5CAE9C451C2B1D24008E3E6F</key>
 		<dict>
 			<key>primary</key>
