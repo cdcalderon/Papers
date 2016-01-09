@@ -39,7 +39,7 @@ static NSString *const AppGroupId = @"group.papersnote";
             }
             else
             {
-                // Save to Core Data 
+                // Save to Core Data
                 DataStore *dataStore = [DataStore sharedDataStore];
                 NSManagedObjectContext *context = [dataStore context];
                 
