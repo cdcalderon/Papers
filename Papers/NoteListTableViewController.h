@@ -2,7 +2,7 @@
 //  NoteListTableViewController.h
 //  Papers
 //
-//  Created by Sofia Calderon on 12/27/15.
+//  Created by Carlos Calderon on 12/27/15.
 //  Copyright © 2015 contructysystems. All rights reserved.
 //
 
@@ -10,9 +10,9 @@
 #import <CoreData/CoreData.h>
 #import "NoteDetailViewController.h"
 
-@interface NoteListTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, NoteDetailViewControllerDelegate>
+@interface NoteListTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, NoteDetailViewControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate>
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+
 
 - (IBAction)addNoteButtonClicked:(UIBarButtonItem *)sender;
 

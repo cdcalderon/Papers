@@ -45,7 +45,7 @@
         }
         
         // Create managed object context
-        _context = [[NSManagedObjectContext alloc] init];
+        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [_context setPersistentStoreCoordinator:psc];
     }
     return self;
