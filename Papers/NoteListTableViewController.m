@@ -2,7 +2,7 @@
 //  NoteListTableViewController.m
 //  Papers
 //
-//  Created by Sofia Calderon on 12/27/15.
+//  Created by Carlos Calderon on 12/27/15.
 //  Copyright © 2015 contructysystems. All rights reserved.
 //
 
@@ -12,54 +12,98 @@
 
 @interface NoteListTableViewController ()
 
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSArray *filteredList;
+@property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
+@property (strong, nonatomic) UISearchController *searchController;
+
 @end
 
 @implementation NoteListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.delegate = self;
     
-    NSError *error;
-    if (![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"An error ocurred: %@", [error localizedDescription]);
-    }
+    self.tableView.tableHeaderView = self.searchController.searchBar;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.definesPresentationContext = YES;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.searchController.searchBar sizeToFit];
+    
+}
+
+- (void)didChangePreferredContentSize:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.searchFetchRequest = nil;
 }
 
-- (NSFetchedResultsController *) fetchedResultsController {
-    
-    if (_fetchedResultsController) {
-        return _fetchedResultsController;
+- (NSFetchRequest *)searchFetchRequest {
+    if (_searchFetchRequest != nil) {
+        return _searchFetchRequest;
     }
     
     DataStore *dataStore = [DataStore sharedDataStore];
     NSManagedObjectContext *context = [dataStore context];
     
-    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
+    _searchFetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:context];
+   
+    [_searchFetchRequest setEntity:entity];
     
-    NSSortDescriptor *primarySort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    [_searchFetchRequest setSortDescriptors:sortDescriptors];
     
-    NSArray *sortArray = [NSArray arrayWithObjects:primarySort , nil];
+    return _searchFetchRequest;
+}
+
+#pragma mark - Fetched Results Controller ===
+
+- (NSFetchedResultsController *)fetchedResultsController {
     
-    [fetch setSortDescriptors:sortArray];
+    if (_fetchedResultsController) {
+        return _fetchedResultsController;
+    }
+    DataStore *dataStore = [DataStore sharedDataStore];
+    NSManagedObjectContext *context = [dataStore context];
     
-    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:context];
+    [fetchRequest setEntity:entity];
     
-    [self setFetchedResultsController:frc];
-    [[self fetchedResultsController] setDelegate:self];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                          managedObjectContext:context
+                                                                            sectionNameKeyPath:nil
+                                                                                     cacheName:nil];
+    frc.delegate = self;
+    self.fetchedResultsController = frc;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
     
     return _fetchedResultsController;
-    
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView reloadData];
 }
 
 - (IBAction)addNoteButtonClicked:(UIBarButtonItem *)sender {
@@ -79,47 +123,62 @@
             addNoteViewController.isEditing = YES;
         }
     }
-//    else if ([segue.destinationViewController isKindOfClass: [NoteDetailViewController class]]) {
-//        NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:self.tableView.indexPathForSelectedRow];
-//        NoteDetailViewController *noteDetailViewController = segue.destinationViewController;
-//        noteDetailViewController.toBeUpdatedManagedObject = note;
-//    }
 }
-
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    NSArray *sections = [[self fetchedResultsController] sections];
-    return [sections count];
+    if (!self.searchController.active)
+    {
+        return [[self.fetchedResultsController sections] count];
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    NSArray *sections = [[self fetchedResultsController] sections];
-    id<NSFetchedResultsSectionInfo> currentSection = [sections objectAtIndex:section];
-    return [currentSection numberOfObjects];
+    
+    if (!self.searchController.active)
+    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    }
+    else
+    {
+        return [self.filteredList count];
+    }
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    [[cell textLabel] setText:[note valueForKey:@"title"]];
-    [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
+    NSManagedObject *note = nil;
+    if (!self.searchController.active)
+    {
+        note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        [[cell textLabel] setText:[note valueForKey:@"title"]];
+        [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
+    }
+    else
+    {
+        NSManagedObject *note = [[self filteredList] objectAtIndex:indexPath.row];
+        [[cell textLabel] setText:[note valueForKey:@"title"]];
+        [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
+    }
     
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSArray *sections = [[self fetchedResultsController] sections];
-    id<NSFetchedResultsSectionInfo> currentSection = [sections objectAtIndex:section];
-    return [currentSection name];
-    
+    if (tableView == self.tableView)
+    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        return [sectionInfo name];
+    }
+    return nil;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -143,41 +202,42 @@
         
         [context deleteObject:[_fetchedResultsController.fetchedObjects objectAtIndex:indexPath.row]];
         
-        NSError *error;
-        
         [dataStore saveChanges];
         
         [[self tableView] endUpdates];
-        
-        // Delete the row from the data source
-        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    if (tableView == self.tableView)
+    {
+        NSMutableArray *index = [NSMutableArray arrayWithObject:UITableViewIndexSearch];
+        NSArray *initials = [self.fetchedResultsController sectionIndexTitles];
+        [index addObjectsFromArray:initials];
+        return index;
+    }
+    return nil;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    if (tableView == self.tableView)
+    {
+        if (index > 0)
+        {
+            return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index-1];
+        }
+        else
+        {
+            //force the table to scroll to the top.
+            CGRect searchBarFrame = self.searchController.searchBar.frame;
+            [self.tableView scrollRectToVisible:searchBarFrame animated:NO];
+            return NSNotFound;
+        }
+    }
+    return 0;
 }
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - AddNoteViewControllerDelegate
 -(void)didAddNote {
@@ -255,10 +315,46 @@
     return sectionName;
 }
 
--(void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    
-    [[self tableView] endUpdates];
-    
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    NSString *searchString = searchController.searchBar.text;
+    [self searchForText:searchString];
+    [self.tableView reloadData];
 }
+
+- (void)searchForText:(NSString *)searchText {
+    DataStore *dataStore = [DataStore sharedDataStore];
+    NSManagedObjectContext *context = [dataStore context];
+    
+    if (context) {
+        NSString *predicateFormat = @"%K BEGINSWITH[cd] %@";
+        NSString *searchAttribute = @"title";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateFormat, searchAttribute, searchText];
+        [self.searchFetchRequest setPredicate:predicate];
+        
+        NSError *error = nil;
+        self.filteredList = [context executeFetchRequest:self.searchFetchRequest error:&error];
+        if (error)
+        {
+            NSLog(@"searchFetchRequest failed: %@",[error localizedDescription]);
+        }
+    }
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    [self updateSearchResultsForSearchController:self.searchController];
+}
+
+
+- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit {
+    
+    [self showDetailViewController:viewControllerToCommit sender:self];
+}
+
 
 @end
