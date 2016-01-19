@@ -12,10 +12,7 @@
 
 @interface NoteListTableViewController ()
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSArray *filteredList;
-@property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
-@property (strong, nonatomic) UISearchController *searchController;
+
 
 @end
 
@@ -101,10 +98,7 @@
     return _fetchedResultsController;
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView reloadData];
-}
+
 
 - (IBAction)addNoteButtonClicked:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"goToNoteDetailViewController" sender:sender];
@@ -128,27 +122,36 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (!self.searchController.active)
-    {
-        return [[self.fetchedResultsController sections] count];
-    }
-    else
-    {
-        return 1;
-    }
+    return self.searchPredicate == nil ? [[self.fetchedResultsController sections] count] : 1;
+//    if (!self.searchController.active)
+//    {
+//        return [[self.fetchedResultsController sections] count];
+//    }
+//    else
+//    {
+//        return 1;
+//    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (!self.searchController.active)
-    {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    if (self.searchPredicate == nil) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections]
+        [section];
         return [sectionInfo numberOfObjects];
+    } else {
+        return [[self.fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:self.
+                 searchPredicate] count];
     }
-    else
-    {
-        return [self.filteredList count];
-    }
+//    if (!self.searchController.active)
+//    {
+//        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+//        return [sectionInfo numberOfObjects];
+//    }
+//    else
+//    {
+//        return [self.filteredList count];
+//    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -156,29 +159,30 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSManagedObject *note = nil;
-    if (!self.searchController.active)
-    {
-        note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[cell textLabel] setText:[note valueForKey:@"title"]];
-        [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
-    }
-    else
-    {
-        NSManagedObject *note = [[self filteredList] objectAtIndex:indexPath.row];
-        [[cell textLabel] setText:[note valueForKey:@"title"]];
-        [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
-    }
     
+    if (self.searchPredicate == nil) {
+        note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+                [[cell textLabel] setText:[note valueForKey:@"title"]];
+                [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
+
+    } else {
+        note = [self.fetchedResultsController.fetchedObjects filteredArrayUsingPredicate:self.
+                searchPredicate][indexPath.row];
+                [[cell textLabel] setText:[note valueForKey:@"title"]];
+                [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
+    }
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (tableView == self.tableView)
-    {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    
+    if (self.searchPredicate == nil) {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections]
+        [section];
         return [sectionInfo name];
+    } else {
+        return nil;
     }
-    return nil;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -252,7 +256,25 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     
-    [[self tableView] beginUpdates];
+    if (self.searchPredicate == nil) {
+       [[self tableView] beginUpdates];
+    
+    } else {
+        [[((NoteListTableViewController *) self.searchController.searchResultsUpdater) tableView] beginUpdates];
+    }
+
+    
+   // [[self tableView] beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    if (self.searchPredicate == nil) {
+        [[self tableView] endUpdates];
+        
+    } else {
+        [[((NoteListTableViewController *) self.searchController.searchResultsUpdater) tableView] endUpdates];
+    }
 }
 
 -(void)controller:(NSFetchedResultsController *)controller
@@ -260,14 +282,21 @@
           atIndex:(NSUInteger)sectionIndex
     forChangeType:(NSFetchedResultsChangeType)type {
     
+    UITableView *tableView;
+    if (self.searchPredicate == nil) {
+        tableView = self.tableView;
+    } else {
+        tableView = [((NoteListTableViewController *)self.searchController.searchResultsUpdater) tableView];
+    }
+    
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+            [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
                             withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+            [tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
                             withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -279,21 +308,29 @@
     forChangeType:(NSFetchedResultsChangeType)type
      newIndexPath:(NSIndexPath *)newIndexPath {
  
+    UITableView *tableView;
+    if (self.searchPredicate == nil) {
+        tableView = self.tableView;
+    } else {
+        tableView = [((NoteListTableViewController *)self.searchController.searchResultsUpdater) tableView];
+    }
+
+    
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeUpdate:
         {
-            UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             NSManagedObject *note = [[self fetchedResultsController] objectAtIndexPath:indexPath];
             [[cell textLabel] setText:[note valueForKey:@"title"]];
             [[cell detailTextLabel] setText: [NSString stringWithFormat:@"%@",[note valueForKey:@"dateModified"]]];
@@ -301,9 +338,9 @@
         }
             
         case NSFetchedResultsChangeMove:
-            [[self tableView] deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
-            [[self tableView] insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
                                     withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -319,29 +356,32 @@
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    NSString *searchString = searchController.searchBar.text;
-    [self searchForText:searchString];
+    NSString *searchText = self.searchController.searchBar.text;
+    NSString *predicateFormat = @"%K BEGINSWITH[cd] %@";
+    NSString *searchAttribute = @"title";
+    self.searchPredicate = searchText.length == 0 ? nil :
+    [NSPredicate predicateWithFormat:predicateFormat, searchAttribute, searchText];
     [self.tableView reloadData];
 }
 
-- (void)searchForText:(NSString *)searchText {
-    DataStore *dataStore = [DataStore sharedDataStore];
-    NSManagedObjectContext *context = [dataStore context];
-    
-    if (context) {
-        NSString *predicateFormat = @"%K BEGINSWITH[cd] %@";
-        NSString *searchAttribute = @"title";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateFormat, searchAttribute, searchText];
-        [self.searchFetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        self.filteredList = [context executeFetchRequest:self.searchFetchRequest error:&error];
-        if (error)
-        {
-            NSLog(@"searchFetchRequest failed: %@",[error localizedDescription]);
-        }
-    }
-}
+//- (void)searchForText:(NSString *)searchText {
+//    DataStore *dataStore = [DataStore sharedDataStore];
+//    NSManagedObjectContext *context = [dataStore context];
+//    
+//    if (context) {
+//        NSString *predicateFormat = @"%K BEGINSWITH[cd] %@";
+//        NSString *searchAttribute = @"title";
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateFormat, searchAttribute, searchText];
+//        [self.searchFetchRequest setPredicate:predicate];
+//        
+//        NSError *error = nil;
+//        self.filteredList = [context executeFetchRequest:self.searchFetchRequest error:&error];
+//        if (error)
+//        {
+//            NSLog(@"searchFetchRequest failed: %@",[error localizedDescription]);
+//        }
+//    }
+//}
 
 #pragma mark - UISearchBarDelegate
 

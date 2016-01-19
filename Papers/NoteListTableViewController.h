@@ -12,7 +12,11 @@
 
 @interface NoteListTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, NoteDetailViewControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate>
 
-
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSArray *filteredList;
+@property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
+@property (strong, nonatomic) UISearchController *searchController;
+@property (strong, nonatomic) NSPredicate *searchPredicate;
 
 - (IBAction)addNoteButtonClicked:(UIBarButtonItem *)sender;
 

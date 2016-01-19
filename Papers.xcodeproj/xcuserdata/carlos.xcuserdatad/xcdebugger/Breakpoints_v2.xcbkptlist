@@ -6,6 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< HEAD
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -20,6 +21,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+=======
+>>>>>>> master
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -27,8 +30,13 @@
             timestampString = "474882657.977789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "438"
             endingLineNumber = "438">
+=======
+            startingLineNumber = "436"
+            endingLineNumber = "436">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,8 +49,13 @@
             timestampString = "474882657.977789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "441"
             endingLineNumber = "441">
+=======
+            startingLineNumber = "438"
+            endingLineNumber = "438">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -55,8 +68,13 @@
             timestampString = "474882657.977789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "442"
             endingLineNumber = "442">
+=======
+            startingLineNumber = "441"
+            endingLineNumber = "441">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -66,6 +84,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Papers/NoteListTableViewController.m"
+<<<<<<< HEAD
             timestampString = "474880322.70925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -73,6 +92,13 @@
             endingLineNumber = "53"
             landmarkName = "-searchFetchRequest"
             landmarkType = "5">
+=======
+            timestampString = "474882657.977789"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "442"
+            endingLineNumber = "442">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -82,11 +108,21 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Papers/NoteListTableViewController.m"
+<<<<<<< HEAD
             timestampString = "474882657.977789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "420"
             endingLineNumber = "420">
+=======
+            timestampString = "474880322.70925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-searchFetchRequest"
+            landmarkType = "5">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -96,6 +132,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Papers/NoteListTableViewController.m"
+<<<<<<< HEAD
             timestampString = "474880322.70925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -119,6 +156,57 @@
             endingLineNumber = "100"
             landmarkName = "-fetchedResultsController"
             landmarkType = "5">
+=======
+            timestampString = "474882657.977789"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "420"
+            endingLineNumber = "420">
+>>>>>>> master
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Papers/NoteListTableViewController.m"
+            timestampString = "474880322.70925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+=======
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+>>>>>>> master
+            landmarkName = "-fetchedResultsController"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Papers/NoteListTableViewController.m"
+<<<<<<< HEAD
+            timestampString = "474882657.977789"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "434"
+            endingLineNumber = "434">
+=======
+            timestampString = "474880322.70925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "@implementation NoteListTableViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -135,6 +223,7 @@
             endingLineNumber = "94"
             landmarkName = "-fetchedResultsController"
             landmarkType = "5">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -147,6 +236,8 @@
             timestampString = "474882657.977789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
+=======
             startingLineNumber = "434"
             endingLineNumber = "434">
          </BreakpointContent>
@@ -161,6 +252,7 @@
             timestampString = "474882657.977789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+>>>>>>> master
             startingLineNumber = "443"
             endingLineNumber = "443">
          </BreakpointContent>
