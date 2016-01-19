@@ -14,15 +14,20 @@
 
 @implementation NoteDetailViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     if (self.isEditing) {
         [self.noteBodyTextView setScrollEnabled:NO];
+        
         [self.noteBodyTextView setEditable:NO];
+        
         [self.noteBodyTextView setDataDetectorTypes:UIDataDetectorTypeAddress |
          UIDataDetectorTypePhoneNumber |
          UIDataDetectorTypeLink];
+        
         if ([self.noteBodyTextView respondsToSelector:@selector(setSelectable:)])
             [self.noteBodyTextView  setSelectable:YES];
         
@@ -33,7 +38,6 @@
 
     }
     
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
