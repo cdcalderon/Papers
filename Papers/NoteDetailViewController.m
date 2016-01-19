@@ -18,9 +18,19 @@
     [super viewDidLoad];
     
     if (self.isEditing) {
+        [self.noteBodyTextView setScrollEnabled:NO];
+        [self.noteBodyTextView setEditable:NO];
+        [self.noteBodyTextView setDataDetectorTypes:UIDataDetectorTypeAddress |
+         UIDataDetectorTypePhoneNumber |
+         UIDataDetectorTypeLink];
+        if ([self.noteBodyTextView respondsToSelector:@selector(setSelectable:)])
+            [self.noteBodyTextView  setSelectable:YES];
+        
         self.titleTextField.text = [self.toBeUpdatedManagedObject valueForKey:@"title"];
-        self.noteBodyTextView.text = [self.toBeUpdatedManagedObject valueForKey:@"body"];
+        self.noteBodyTextView.text =   [NSString stringWithFormat:@"%@", [self.toBeUpdatedManagedObject valueForKey:@"body"]];
+        
         [self.upsertNoteButton setTitle:@"Save" forState:UIControlStateNormal];
+
     }
     
     // Do any additional setup after loading the view.
