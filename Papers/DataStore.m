@@ -34,9 +34,19 @@
         
         [options setValue:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
         [options setValue:[NSNumber numberWithBool:YES] forKey:NSInferMappingModelAutomaticallyOption];
+        
+        [options setValue:NSPersistentStoreUbiquitousContentNameKey forKey:@"iCloudApp"];
 
         NSURL *directory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.papersnote"];
         NSURL *storeURL = [directory  URLByAppendingPathComponent:@"notes.sqlite"];
+        
+        // iCloud notification subscriptions
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        [notificationCenter addObserver:self selector:@selector(storeWillChange:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:psc];
+        [notificationCenter addObserver:self selector:@selector(storeDidChange:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:psc];
+        [notificationCenter addObserver:self selector:@selector(storeDidImportUbiquitousContentChanges:)
+                                   name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                                 object:psc];
         
         NSError *error = nil;
         if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
@@ -61,5 +71,40 @@
     return saveSuccessful;
 }
 
+- (void)storeDidImportUbiquitousContentChanges:(NSNotification*)notification {
+    NSLog(@"%@", notification.userInfo.description);
+    NSManagedObjectContext *moc = self.context;
+    [moc performBlock:^{
+        // Merge the content
+        [moc mergeChangesFromContextDidSaveNotification:notification];
+    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Refresh the UI here
+    });
+}
+
+- (void)storeWillChange:(NSNotification *)notification {
+    NSLog(@"%@", notification.userInfo.description);
+    NSManagedObjectContext *moc = self.context;
+    [moc performBlockAndWait:^{
+        NSError *error = nil;
+        if ([moc hasChanges]) {
+            [moc save:&error];
+        }
+        [moc reset];
+    }];
+    // This is a good place to let your UI know it needs to get ready
+    // to adjust to the change and deal with new data. This might include
+    // invalidating UI caches, reloading data, resetting views, etc...
+}
+
+- (void)storeDidChange:(NSNotification *)notification {
+    NSLog(@"%@", notification.userInfo.description);
+    // At this point it's official, the change has happened. Tell your
+    // user interface to refresh itself
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Refresh the UI here
+    });
+}
 
 @end
