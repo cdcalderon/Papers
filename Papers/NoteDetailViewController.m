@@ -22,7 +22,7 @@
     if (self.isEditing) {
         [self.noteBodyTextView setScrollEnabled:NO];
         
-        [self.noteBodyTextView setEditable:NO];
+        [self.noteBodyTextView setEditable:YES];
         
         [self.noteBodyTextView setDataDetectorTypes:UIDataDetectorTypeAddress |
          UIDataDetectorTypePhoneNumber |
@@ -37,7 +37,7 @@
         [self.upsertNoteButton setTitle:@"Save" forState:UIControlStateNormal];
 
     }
-    
+    [self.noteBodyTextView setEditable:NO];
 }
 
 - (void)didReceiveMemoryWarning {
