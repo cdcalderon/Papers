@@ -287,18 +287,24 @@
 				TargetAttributes = {
 					07FC3E681C3E2404007E0F6E = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 66CK93Z36P;
+						DevelopmentTeam = 8SWA6HC7HK;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
 					};
 					5CAE9C451C2B1D24008E3E6F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 66CK93Z36P;
+						DevelopmentTeam = 8SWA6HC7HK;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -449,7 +455,7 @@
 				INFOPLIST_FILE = ShareNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.Papers.ShareNote;
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.PapersRev1.ShareNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -465,7 +471,7 @@
 				INFOPLIST_FILE = ShareNote/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.Papers.ShareNote;
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.PapersRev1.ShareNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -564,7 +570,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "carlos.calderon.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.PapersRev1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -579,7 +585,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Papers/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "carlos.calderon.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = carlos.calderon.PapersRev1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

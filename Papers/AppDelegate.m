@@ -23,6 +23,11 @@
     
    // [DataHelper createNotesSampleData]; // create test sample data
     //[DataHelper logAllNotes]; // log test sample data
+    
+    
+    //find "$HOME/Library/Developer/CoreSimulator" -name "notes.sqlite"
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSLog(@"%@",[paths objectAtIndex:0]);
     return YES;
 }
 
